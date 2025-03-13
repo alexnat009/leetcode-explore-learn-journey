@@ -9,6 +9,12 @@ class TreeNode:
 		self.right = right
 
 
+class ListNode:
+	def __init__(self, val=0, next=None):
+		self.val = val
+		self.next = next
+
+
 def print_tree(root: Optional[TreeNode]):
 	if not root:
 		print("Tree is empty")
