@@ -27,6 +27,15 @@ def create_linked_list_from_list(values):
 	return head
 
 
+# Helper function to print a linked list
+def print_linked_list(head):
+	values = []
+	while head:
+		values.append(str(head.val))
+		head = head.next
+	print(" -> ".join(values))
+
+
 def print_tree(root: Optional[TreeNode]):
 	if not root:
 		print("Tree is empty")
