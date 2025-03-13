@@ -15,6 +15,18 @@ class ListNode:
 		self.next = next
 
 
+# Helper function to create a linked list from a list of values
+def create_linked_list_from_list(values):
+	if not values:
+		return None
+	head = ListNode(values[0])
+	current = head
+	for val in values[1:]:
+		current.next = ListNode(val)
+		current = current.next
+	return head
+
+
 def print_tree(root: Optional[TreeNode]):
 	if not root:
 		print("Tree is empty")
