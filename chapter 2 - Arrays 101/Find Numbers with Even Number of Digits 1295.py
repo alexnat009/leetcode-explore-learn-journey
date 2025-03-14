@@ -1,9 +1,10 @@
+import math
 from typing import List
 
 
 class Solution:
 	def findNumbers(self, nums: List[int]) -> int:
-		return sum([1 for i in nums if len(str(i)) % 2 == 0])
+		return sum(1 for i in nums if len(str(i)) % 2 == 0)
 
 
 if __name__ == "__main__":
