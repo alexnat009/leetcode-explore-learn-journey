@@ -3,17 +3,13 @@ from typing import List
 
 class Solution:
 	def thirdMax(self, nums: List[int]) -> int:
-		if len(nums) < 3:
-			return max(nums)
+		tmp = set(nums)
+		if len(tmp) < 3:
+			return max(tmp)
 		else:
-			tmp = sorted(nums)
-			k = set()
-			for i in range(len(tmp) - 1, -1, -1):
-				k.add(tmp[i])
-				if len(k) == 3:
-					return tmp[i]
-			if len(k) < 3:
-				return max(k)
+			tmp.remove(max(tmp))
+			tmp.remove(max(tmp))
+			return max(tmp)
 
 
 if __name__ == "__main__":
