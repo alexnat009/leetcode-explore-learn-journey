@@ -5,16 +5,10 @@ class Solution:
 	def checkIfExist(self, arr: List[int]) -> bool:
 		tmpSet = set()
 		for i in arr:
-			if i not in tmpSet:
-				tmpSet.add(i)
-			elif i == 0 and i in tmpSet:
+			if (i * 2 in tmpSet) or (i / 2 in tmpSet and i % 2 == 0):
 				return True
-
-			if ((i * 2 in tmpSet) or (i / 2 in tmpSet)) and i != 0:
-				return True
+			tmpSet.add(i)
 		return False
-
-
 
 
 if __name__ == "__main__":
