@@ -3,11 +3,25 @@ from typing import List
 
 class Solution:
 	def checkIfExist(self, arr: List[int]) -> bool:
-		tmpSet = set()
-		for i in arr:
-			if (i * 2 in tmpSet) or (i / 2 in tmpSet and i % 2 == 0):
+		arr = sorted(arr)
+		for i in range(len(arr)):
+			target = arr[i] * 2
+			if self.binarySearch(arr, target, i):
 				return True
-			tmpSet.add(i)
+		return False
+
+	def binarySearch(self, arr: List[int], target: int, exclude_index: int) -> int:
+		left = 0
+		right = len(arr) - 1
+		while left <= right:
+			mid = left + (right - left) // 2
+
+			if arr[mid] == target and mid != exclude_index:
+				return True
+			elif arr[mid] < target:
+				left = mid + 1
+			else:
+				right = mid - 1
 		return False
 
 
