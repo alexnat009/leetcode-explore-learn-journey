@@ -4,17 +4,17 @@ from typing import List
 
 class Solution:
 	def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+		for num in nums:
+			i = abs(num) - 1
+			nums[i] = -1 * abs(nums[i])
 		res = []
-		cnt = Counter(nums)
-		for i in range(1, len(nums) + 1):
-			if not cnt.get(i):
-				res.append(i)
+		for i, n in enumerate(nums):
+			if n > 0:
+				res.append(i + 1)
 		return res
-
 
 if __name__ == "__main__":
 	sol = Solution()
-	nums = [4, 3, 2, 7, 8, 2, 3, 1]
-	# nums = [1, 1]
+	nums = [1, 5, 4, 5, 5]
 	print(sol.findDisappearedNumbers(nums))
 	print(nums)
