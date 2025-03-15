@@ -7,23 +7,11 @@ class Solution:
 		Do not return anything, modify nums in-place instead.
 		"""
 
-		n = len(nums)
-		slowP = 0
-		fastP = 1
-		seenZero = False
-		while fastP < n:
-			if nums[fastP] != 0 and nums[slowP] != 0 and not seenZero:
-				fastP += 1
-				slowP += 1
-			else:
-				if nums[fastP] == 0:
-					fastP += 1
-					seenZero = True
-				else:
-					if nums[slowP] == 0:
-						nums[slowP], nums[fastP] = nums[fastP], nums[slowP]
-						seenZero = False
-					slowP += 1
+		k = 0
+		for i in range(len(nums)):
+			if nums[i] != 0:
+				nums[i], nums[k] = nums[k], nums[i]
+				k += 1
 
 
 if __name__ == "__main__":
