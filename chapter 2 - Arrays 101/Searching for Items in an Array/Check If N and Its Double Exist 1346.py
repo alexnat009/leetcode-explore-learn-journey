@@ -1,27 +1,18 @@
+from collections import Counter
 from typing import List
 
 
 class Solution:
 	def checkIfExist(self, arr: List[int]) -> bool:
-		arr = sorted(arr)
-		for i in range(len(arr)):
-			target = arr[i] * 2
-			if self.binarySearch(arr, target, i):
-				return True
-		return False
+		cnt = Counter()
+		for i in arr:
+			cnt[i] += 1
 
-	def binarySearch(self, arr: List[int], target: int, exclude_index: int) -> int:
-		left = 0
-		right = len(arr) - 1
-		while left <= right:
-			mid = left + (right - left) // 2
-
-			if arr[mid] == target and mid != exclude_index:
+		for i in arr:
+			if i != 0 and i * 2 in cnt:
 				return True
-			elif arr[mid] < target:
-				left = mid + 1
-			else:
-				right = mid - 1
+			if i == 0 and cnt.get(i) > 1:
+				return True
 		return False
 
 
