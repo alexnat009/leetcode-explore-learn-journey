@@ -3,23 +3,25 @@ from typing import List
 
 class Solution:
 	def twoSum(self, numbers: List[int], target: int) -> List[int]:
-		leftP, rightP = 0, len(numbers) - 1
-		res = [-1, -1]
-		while leftP < rightP:
-			if numbers[leftP] + numbers[rightP] == target:
-				res = [leftP + 1, rightP + 1]
-				break
-			elif numbers[leftP] + numbers[rightP] < target:
-				leftP += 1
-			else:
-				rightP -= 1
-		return res
+
+		for i in range(len(numbers)):
+			low = i + 1
+			high = len(numbers) - 1
+			while low <= high:
+				mid = low + (high - low) // 2
+				if numbers[mid] + numbers[i] == target:
+					return [i + 1, mid + 1]
+				elif numbers[mid] + numbers[i] > target:
+					high = mid - 1
+				else:
+					low = mid + 1
+		return [-1, -1]
 
 
 if __name__ == "__main__":
 	sol = Solution()
 
-	numbers = [2, 7, 11, 15]
-	target = 9
+	numbers = [1, 2, 7, 11, 15, 20]
+	target = 17
 
 	print(sol.twoSum(numbers, target))
