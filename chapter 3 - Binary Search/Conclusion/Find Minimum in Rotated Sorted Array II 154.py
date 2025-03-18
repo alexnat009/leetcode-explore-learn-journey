@@ -6,27 +6,13 @@ class Solution:
 		low = 0
 		high = len(nums) - 1
 		while low < high:
-
-			while True:
-				if low == len(nums) - 1:
-					break
-				if nums[low] == nums[low + 1]:
-					low += 1
-
-				else:
-					break
-			while True:
-				if high == 0:
-					break
-				if nums[high] == nums[high - 1]:
-					high -= 1
-				else:
-					break
 			mid = low + (high - low) // 2
-			if nums[mid] > nums[high]:
-				low = mid + 1
-			else:
+			if nums[mid] == nums[high]:
+				high -= 1
+			elif nums[mid] < nums[high]:
 				high = mid
+			else:
+				low = mid + 1
 		return nums[low]
 
 	def rotate_n_times(self, arr, n):
