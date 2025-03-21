@@ -1,5 +1,4 @@
 from typing import List
-import numpy as np
 
 
 class Solution:
@@ -42,5 +41,4 @@ if __name__ == "__main__":
 	sol = Solution()
 
 	mat = [[1, 2, 3], [4, 5, 6]]
-	mat1 = np.ones((3, 5), dtype=np.int_)
 	print(sol.findDiagonalOrder(mat))
