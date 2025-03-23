@@ -3,29 +3,17 @@ from typing import List
 
 class Solution:
 	def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-		i = 0
-		k = 1
-		minSubarray = 0
-		n = len(nums) - 1
-		currentSum = nums[0]
-		growing = True
-		if currentSum >= target:
-			minSubarray = 1
-		while k <= n:
-			if growing:
-				currentSum += nums[k]
-			else:
-				currentSum -= nums[i - 1]
-			if currentSum < target:
-				k += 1
-				growing = True
-
-			else:
-				minSubarray = min(minSubarray, k - i + 1) if minSubarray else k - i + 1
-				i += 1
-				growing = False
-
-		return minSubarray
+		n = len(nums)
+		left = 0
+		currentSum = 0
+		minSubArray = float("inf")
+		for right in range(n):
+			currentSum += nums[right]
+			while currentSum >= target:
+				minSubArray = min(minSubArray, right - left + 1)
+				currentSum -= nums[left]
+				left += 1
+		return minSubArray if minSubArray != float('inf') else 0
 
 
 if __name__ == "__main__":
