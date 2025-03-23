@@ -3,13 +3,16 @@ from typing import List
 
 class Solution:
 	def longestCommonPrefix(self, strs: List[str]) -> str:
-		prefix = []
-		for i in zip(*strs):
-			if len(set(i)) == 1:
-				prefix.append(i[0])
-			else:
-				break
-		return "".join(prefix)
+		if not strs:
+			return ""
+
+		min_str = min(strs, key=len)
+		for i, char in enumerate(min_str):
+			for s in strs:
+				if s[i] != char:
+					return min_str[:i]
+
+		return min_str
 
 
 if __name__ == "__main__":
