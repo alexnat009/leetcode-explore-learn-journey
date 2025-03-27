@@ -8,24 +8,15 @@ class Solution:
 		"""
 		n = len(nums)
 		k = k % n
-		count = 0
+		self.reverse(nums, 0, n - 1)
+		self.reverse(nums, 0, k - 1)
+		self.reverse(nums, k, n - 1)
 
-		start = 0
-		while count < n:
-			current = start
-			prev = nums[start]
-
-			while True:
-				next_id = (current + k) % n
-				nums[next_id], prev = prev, nums[next_id]
-				current = next_id
-				count += 1
-
-				if current == start:
-					break
-			start += 1
-			if count >= n:
-				break
+	def reverse(self, nums, left, right):
+		while left < right:
+			nums[left], nums[right] = nums[right], nums[left]
+			left += 1
+			right -= 1
 
 
 if __name__ == "__main__":
@@ -33,7 +24,7 @@ if __name__ == "__main__":
 	# nums = [10, 2, 3]
 
 	nums = [-1, -100, 3, 99]
-	k = 2
+	k = 0
 
 	print(sol.rotate(nums, k))
 	print(nums)
