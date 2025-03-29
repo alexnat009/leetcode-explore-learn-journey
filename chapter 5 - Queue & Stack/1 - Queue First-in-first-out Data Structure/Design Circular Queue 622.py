@@ -1,57 +1,42 @@
 class MyCircularQueue:
 
 	def __init__(self, k: int):
-		self.queue = [-1] * k
-		self.head = None
-		self.tail = None
+		self.queue = []
+		self.k = k
 
 	def enQueue(self, value: int) -> bool:
-		if self.isEmpty():
-			self.head = 0
-			self.tail = 0
-			self.queue[self.head] = value
+		if self.k > 0:
+			self.queue.append(value)
+			self.k -= 1
 			return True
-		else:
-			if self.isFull():
-				return False
-			if self.tail + 1 < len(self.queue):
-				self.tail += 1
-			else:
-				self.tail = 0
-
-			self.queue[self.tail] = value
-			return True
+		return False
 
 	def deQueue(self) -> bool:
-		if self.isEmpty():
-			return False
-
-		self.queue[self.head] = -1
-		if self.isEmpty():
-			self.head = self.tail = 0
+		if self.queue:
+			self.queue.pop(0)
+			self.k += 1
 			return True
-		if self.head + 1 < len(self.queue):
-			self.head += 1
-		else:
-			self.head = 0
-
-		return True
+		return False
 
 	def Front(self) -> int:
-		if self.isEmpty():
-			return -1
-		return self.queue[self.head]
+		if self.queue:
+			return self.queue[0]
+		return -1
 
 	def Rear(self) -> int:
-		if self.isEmpty():
-			return -1
-		return self.queue[self.tail]
+		if self.queue:
+			return self.queue[-1]
+		return -1
 
 	def isEmpty(self) -> bool:
-		return all(x == -1 for x in self.queue)
+		if not self.queue:
+			return True
+		return False
 
 	def isFull(self) -> bool:
-		return all(x != -1 for x in self.queue)
+		if self.k == 0:
+			return True
+		return False
 
 
 if __name__ == "__main__":
