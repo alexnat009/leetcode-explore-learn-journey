@@ -9,6 +9,12 @@ class TreeNode:
 		self.right = right
 
 
+class Node:
+	def __init__(self, val):
+		self.val = val
+		self.neighbors = []  #
+
+
 class ListNode:
 	def __init__(self, val=0, next=None):
 		self.val = val
@@ -58,3 +64,42 @@ def print_tree(root: Optional[TreeNode]):
 		result.pop()
 
 	print(" ".join(result))
+
+
+def bfs_no_visited_hash(root: Node, target: Node):
+	if root == target:
+		return 0
+	queue = deque([root])
+	step = 0
+
+	while queue:
+		size = len(queue)
+		for _ in range(size):
+			cur = queue.popleft()
+			if cur == target:
+				return step
+			for neighbor in cur.neighbors:
+				queue.append(neighbor)
+		step += 1
+	return -1
+
+
+def bfs_visited_hash(root: Node, target: Node):
+	if root == target:
+		return 0
+	queue = deque([root])
+	visited = {root}
+	step = 0
+
+	while queue:
+		size = len(queue)
+		for _ in range(size):
+			cur = queue.popleft()
+			if cur == target:
+				return step
+			for neighbor in cur.neighbors:
+				if neighbor not in visited:
+					queue.append(neighbor)
+					visited.add(neighbor)
+		step += 1
+	return -1
