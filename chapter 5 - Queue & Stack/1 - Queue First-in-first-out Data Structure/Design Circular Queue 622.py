@@ -1,45 +1,35 @@
+from collections import deque
+
+
 class MyCircularQueue:
 
 	def __init__(self, k: int):
-		self.queue = [-1] * k
-		self.head = -1
-		self.tail = -1
+		self.queue = deque([])
 		self.size = k
 
 	def enQueue(self, value: int) -> bool:
-		if self.isFull():
+		if len(self.queue) == self.size:
 			return False
-		if self.isEmpty():
-			self.head = 0
-		self.tail = (self.tail + 1) % self.size
-		self.queue[self.tail] = value
+		self.queue.append(value)
 		return True
 
 	def deQueue(self) -> bool:
-		if self.isEmpty():
+		if not self.queue:
 			return False
-		if self.head == self.tail:
-			self.head = -1
-			self.tail = -1
-			return True
-		self.head = (self.head + 1) % self.size
+		self.queue.popleft()
 		return True
 
 	def Front(self) -> int:
-		if self.isEmpty():
-			return -1
-		return self.queue[self.head]
+		return self.queue[0] if self.queue else -1
 
 	def Rear(self) -> int:
-		if self.isEmpty():
-			return -1
-		return self.queue[self.tail]
+		return self.queue[-1] if self.queue else -1
 
 	def isEmpty(self) -> bool:
-		return self.head == -1
+		return not self.queue
 
 	def isFull(self) -> bool:
-		return (self.tail + 1) % self.size == self.head
+		return len(self.queue) == self.size
 
 
 if __name__ == "__main__":
