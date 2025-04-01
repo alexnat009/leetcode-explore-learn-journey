@@ -103,3 +103,16 @@ def bfs_visited_hash(root: Node, target: Node):
 					visited.add(neighbor)
 		step += 1
 	return -1
+
+
+def dfs(cur: Node, target: Node, visited: set):
+	if cur == target:
+		return True
+
+	for next_node in cur.neighbors:
+		if next_node not in visited:
+			visited.add(next_node)
+			if dfs(next_node, target, visited):
+				return True
+	return False
+
