@@ -1,4 +1,5 @@
 from typing import Optional
+from collections import deque
 
 
 class Node:
@@ -18,19 +19,21 @@ class Node:
 
 class Solution:
 	def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
-		visited = {}
+		if not node:
+			return None
 
-		def dfs(node: Optional['Node']):
-			if node in visited:
-				return visited[node]
+		clone = {node: Node(node.val)}
+		queue = deque([node])
+		while queue:
+			current = queue.popleft()
 
-			copy = Node(node.val)
-			visited[node] = copy
-			for neighbor in node.neighbors:
-				copy.neighbors.append(dfs(neighbor))
-			return copy
+			for next_node in current.neighbors:
+				if next_node not in clone:
+					clone[next_node] = Node(next_node.val)
 
-		return dfs(node) if node else None
+					queue.append(next_node)
+				clone[current].neighbors.append(clone[next_node])
+		return clone[node]
 
 
 if __name__ == "__main__":
