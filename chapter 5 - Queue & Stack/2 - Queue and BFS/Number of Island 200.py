@@ -11,26 +11,20 @@ class Solution:
 		directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 		island_count = 0
 
-		def bfs(start_i, start_j):
-			if not grid:
-				return 0
+		def dfs(start_i, start_j):
+			if start_i < 0 or start_j < 0 or start_i >= n or start_j >= m or grid[start_i][start_j] != "1":
+				return
 
-			queue = deque([(start_i, start_j)])
 			grid[start_i][start_j] = "0"
 
-			while queue:
-				current_i, current_j = queue.popleft()
-				for di, dj in directions:
-					next_i, next_j = current_i + di, current_j + dj
-					if 0 <= next_i < n and 0 <= next_j < m and grid[next_i][next_j] == "1":
-						grid[next_i][next_j] = "0"
-						queue.append((next_i, next_j))
+			for di, dj in directions:
+				dfs(start_i + di, start_j + dj)
 
 		for i in range(n):
 			for j in range(m):
 				if grid[i][j] == "1":
 					island_count += 1
-					bfs(i, j)
+					dfs(i, j)
 
 		return island_count
 
