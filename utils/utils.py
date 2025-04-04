@@ -105,7 +105,7 @@ def bfs_visited_hash(root: Node, target: Node):
 	return -1
 
 
-def dfs(cur: Node, target: Node, visited: set):
+def dfs_recursive(cur: Node, target: Node, visited: set):
 	if cur == target:
 		return True
 
