@@ -6,16 +6,28 @@ from utils.utils import TreeNode, print_tree
 
 class Solution:
 	def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-		if not root:
-			return []
-		return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
+		stack = deque()
+		res = []
+		cur = root
+		while stack or cur:
+			while cur:
+				stack.append(cur)
+				cur = cur.left
+
+			cur = stack.pop()
+			res.append(cur.val)
+			cur = cur.right
+
+		return res
 
 
 if __name__ == "__main__":
 	sol = Solution()
 	root = TreeNode(1)
-	root.right = TreeNode(2)
-	root.right.left = TreeNode(3)
+	root.left = TreeNode(2)
+	root.right = TreeNode(5)
+	root.left.left = TreeNode(3)
+	root.left.right = TreeNode(4)
 
 	print_tree(root)
 	print(sol.inorderTraversal(root))
