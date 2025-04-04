@@ -116,3 +116,16 @@ def dfs_recursive(cur: Node, target: Node, visited: set):
 				return True
 	return False
 
+
+def dfs_iterative(cur: Node, target: Node, visited: set):
+	stack = deque([cur])
+	visited.add(cur)
+	while stack:
+		cur = deque.popleft()
+		if cur == target:
+			return True
+		for neighbor in cur.neighbors:
+			if neighbor not in visited:
+				visited.add(neighbor)
+				stack.append(visited)
+	return False
