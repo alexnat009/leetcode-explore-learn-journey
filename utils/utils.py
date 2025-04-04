@@ -112,7 +112,7 @@ def dfs_recursive(cur: Node, target: Node, visited: set):
 	for next_node in cur.neighbors:
 		if next_node not in visited:
 			visited.add(next_node)
-			if dfs(next_node, target, visited):
+			if dfs_recursive(next_node, target, visited):
 				return True
 	return False
 
