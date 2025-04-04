@@ -1,21 +1,25 @@
-from typing import List
+from typing import List, Dict, Tuple
 
 
 class Solution:
-	def __init__(self):
-		self.total_ways = 0
-
 	def findTargetSumWays(self, nums: List[int], target: int) -> int:
-		self.calculate_ways(nums, 0, 0, target)
-		return self.total_ways
+		memo: Dict[Tuple[int, int], int] = {}
 
-	def calculate_ways(self, nums: List[int], current_index: int, current_sum: int, target: int):
-		if current_index == len(nums):
-			if current_sum == target:
-				self.total_ways += 1
-		else:
-			self.calculate_ways(nums, current_index + 1, current_sum + nums[current_index], target)
-			self.calculate_ways(nums, current_index + 1, current_sum - nums[current_index], target)
+		def dfs(index: int, current_sum: int) -> int:
+			if index == len(nums):
+				return 1 if current_sum == target else 0
+
+			if (index, current_sum) in memo:
+				return memo[(index, current_sum)]
+
+			add = dfs(index + 1, current_sum + nums[index])
+			subtract = dfs(index + 1, current_sum - nums[index])
+
+			memo[(index, current_sum)] = add + subtract
+
+			return memo[(index, current_sum)]
+
+		return dfs(0, 0)
 
 
 if __name__ == "__main__":
