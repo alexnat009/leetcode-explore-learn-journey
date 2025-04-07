@@ -3,7 +3,7 @@
 
 from typing import Optional
 
-from utils.utils import ListNode, create_linked_list_from_list, print_linked_list
+from utils.utils import ListNode
 
 
 class Solution:
@@ -27,5 +27,3 @@ if __name__ == "__main__":
 
 	head = [3, 2, 0, -4]
 	pos = 1
-
-	print(sol.hasCycle(head))
