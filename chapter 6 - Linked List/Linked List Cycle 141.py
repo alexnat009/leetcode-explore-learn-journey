@@ -8,17 +8,15 @@ from utils.utils import ListNode
 
 class Solution:
 	def hasCycle(self, head: Optional[ListNode]) -> bool:
-		if not head:
+		try:
+			ptrSlow = head
+			ptrFast = head.next
+			while ptrSlow is not ptrFast:
+				ptrSlow = ptrSlow.next
+				ptrFast = ptrFast.next.next
+			return True
+		except AttributeError:
 			return False
-		ptrSlow = head
-		ptrFast = head
-
-		while ptrFast.next and ptrFast.next.next:
-			ptrSlow = ptrSlow.next
-			ptrFast = ptrFast.next.next
-			if ptrSlow == ptrFast:
-				return True
-		return False
 
 
 if __name__ == "__main__":
