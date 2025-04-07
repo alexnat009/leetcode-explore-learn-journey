@@ -10,15 +10,14 @@ class Solution:
 	def hasCycle(self, head: Optional[ListNode]) -> bool:
 		if not head:
 			return False
-		ptr = head
-		visited = {ptr}
+		ptrSlow = head
+		ptrFast = head
 
-		while ptr.next:
-			ptr = ptr.next
-			if ptr in visited:
+		while ptrFast.next and ptrFast.next.next:
+			ptrSlow = ptrSlow.next
+			ptrFast = ptrFast.next.next
+			if ptrSlow == ptrFast:
 				return True
-			else:
-				visited.add(ptr)
 		return False
 
 
